@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Вакансия «Продвинутый верстальщик»
+        </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style type="text/css">
+            body{
+                margin: 0px;
+            }
+            .top-block, .bottom-block, #content{
+                width: 650px;
+                margin-left: 200px;
+                position: absolute;
+            }
+            .top-block, .bottom-block{
+                height: 60px;
+                font-family: monospace;
+                font-size: 16pt;
+                position: static;
+            }
+            .top-block{
+                background-color: #C771A0;
+                z-index: 1000;
+            }
+            .bottom-block{
+                background-color: #E7D683;
+                z-index: 2000;
+            }
+            #content{
+                font-size: 16pt;
+                background-color: #5EA2A5;
+                height: 1200px;
+                z-index: 0;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                var bbHeight = parseInt($('.bottom-block').css('height'));
+
+                $('.bottom-block').css({
+                    'top': $('.top-block').css('height')
+                });
+
+                $('#content').css({
+                    'top': parseInt($('.bottom-block').css('height')) +
+                            parseInt($('.top-block').css('height'))
+                });
+
+                $(document).scroll(function () {
+
+                    if (bbHeight < scrollY) {
+                        $('.bottom-block').css({
+                            'position': 'absolute',
+                            'top': scrollY
+                        });
+                    } else {
+                        $('.bottom-block').css({
+                            'top': $('.top-block').css('height')
+                        });
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <header>
+            <div class="top-block">top-block</div>
+            <div class="bottom-block">bottom-block</div>
+        </header>
+        <div id="content">
+            Как бы вы реализовали прилипание к верху сайта блока .bottom-block при прокрутке странице? Бонусом будет пример кода.
+        </div>
+
+        <footer></footer>
+    </body>
+</html>
